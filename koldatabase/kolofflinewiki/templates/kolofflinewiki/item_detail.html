@@ -1,0 +1,26 @@
+{% load static %}
+<html>
+	<head>
+		<title>{{ item.name }}</title>
+		<link rel="stylesheet" type="text/css" href="{% static 'kolofflinewiki/style.css' %}" />
+	</head>
+	<body>
+		<center>
+			{% with 'kolofflinewiki/item_images/'|add:item.image_src as image_src %}
+			<img src="{% static image_src %}">
+			{% endwith %}
+			<br><b>{{ item.name }}</b>
+		</center>
+
+		<p><blockquote>
+			{{ item.description }}
+		</blockquote>
+
+		{% if recipe_ingredient %}
+			<br>Used in:
+			{% for recipe in recipe_ingredient %}
+				<br>{% include "kolofflinewiki/recipe.html" %}
+			{% endfor %}
+		{% endif %}
+	</body>
+</html>
